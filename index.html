@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Oratory Guild</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>The Oratory Guild</h1>
+    <p>Structured student-led public speaking forum for Classes 6–8</p>
+  </header>
+
+  <main class="container">
+    <section id="authCard" class="card">
+      <h2>Register / Login</h2>
+      <form id="authForm" class="grid">
+        <label>Name <input id="name" required /></label>
+        <label>Class
+          <select id="studentClass" required>
+            <option value="">Select</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+        </label>
+        <label>Section <input id="section" required /></label>
+        <label>Phone Number <input id="phone" required inputmode="numeric" /></label>
+        <label>Email ID <input id="email" required type="email" /></label>
+        <button type="submit">Continue</button>
+      </form>
+      <p class="hint">Only <strong>@arborinternationalschool.com</strong> emails are allowed.</p>
+      <p id="authError" class="error"></p>
+    </section>
+
+    <section id="app" class="hidden">
+      <nav class="tabs" id="tabs"></nav>
+      <section id="content" class="card"></section>
+    </section>
+  </main>
+
+  <template id="clubInfoTpl">
+    <h2>Club Information</h2>
+    <p><strong>Name:</strong> The Oratory Guild</p>
+    <p><strong>Members:</strong> Guilders</p>
+    <h3>Vision</h3>
+    <p>To nurture confident, articulate, and responsible student leaders.</p>
+    <h3>Objectives</h3>
+    <ul>
+      <li>Build confidence</li>
+      <li>Improve communication</li>
+      <li>Develop leadership</li>
+      <li>Encourage structured thinking</li>
+      <li>Promote discipline</li>
+    </ul>
+    <h3>Code of Conduct</h3>
+    <ul>
+      <li>Respect speakers</li>
+      <li>No interruptions</li>
+      <li>Constructive feedback only</li>
+    </ul>
+    <h3>Oaths</h3>
+    <p><strong>Opening Oath (G.O.D):</strong> "I open this Guild with purpose, courage, and respect. May every voice be heard and every thought be valued."</p>
+    <p><strong>Closing Oath (All Members):</strong> "We close as better listeners, better speakers, and better leaders. We carry discipline, empathy, and confidence forward."</p>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
