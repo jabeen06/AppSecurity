@@ -1,24 +1,86 @@
-# The Oratory Guild
+# The Oratory Guild (Production-Style Full-Stack Mobile App)
 
-A secure, role-based school web app for Classes 6–8 to run and track structured student-led speaking meetings.
+The Oratory Guild is a modular public speaking management platform for **Classes 6–8** with secure school-only access, structured roles, OR tracking, notifications, and governance tools.
+
+## Stack
+
+- **Backend:** Node.js + Express (modular API design)
+- **Frontend:** React Native (Expo) mobile client
+
+## Production-Like Folder Structure
+
+```text
+.
+├── backend/
+│   ├── package.json
+│   └── src/
+│       ├── app.js
+│       ├── server.js
+│       ├── config/
+│       ├── constants/
+│       ├── controllers/
+│       ├── middleware/
+│       ├── models/
+│       ├── routes/
+│       ├── services/
+│       └── utils/
+└── frontend/
+    └── mobile/
+        ├── App.js
+        ├── package.json
+        └── src/
+            ├── components/
+            ├── constants/
+            ├── context/
+            ├── navigation/
+            ├── screens/
+            ├── services/
+            ├── theme/
+            └── utils/
+```
+
+## Feature Coverage
+
+### Mandatory role pages and guidelines
+- Dedicated mobile **Role Guidelines** screen
+- Dedicated API routes for role listing/details
+- All required roles included with responsibilities and skill sets:
+  - G.O.D, Chronomaster, T.T.M, Grammarian, Articulation Auditor, Critical Listener, Guild Speaker, Speech Evaluator, General Evaluator, Ballot Steward
+
+### Authentication and security
+- Email domain restriction (`@arborinternationalschool.com` by default)
+- Class restriction (6, 7, 8)
+- JWT auth + role-based access middleware
+- Admin control via configured admin emails
+
+### Core systems
+- OR stage submission and admin approval workflow
+- Role assignment (one role per user per meeting + one user per role)
+- Meeting SMS notifications via service layer stub
+- Timing support screen for Chronomaster checkpoints
+- Voting API with timing eligibility check
+- Dashboard metrics endpoint for admin panel
+- Code of Conduct and Oaths screens
 
 ## Run
 
-Open `index.html` in a browser.
+### Backend
 
-## Key Features
+```bash
+cd backend
+npm install
+npm run start
+```
 
-- School-domain-only registration (`@arborinternationalschool.com`)
-- Strict class validation (6, 7, 8)
-- Admin access control via designated email
-- Meeting setup, role assignment rules, OR stage tracking
-- Voting with timing eligibility checks
-- Progress dashboard, role history, participation reporting
+### Mobile App
 
-## Security Controls
+```bash
+cd frontend/mobile
+npm install
+npm run start
+```
 
-- Input validation for class, phone, and email domain
-- Role-based admin panel guards
-- Duplicate role prevention per meeting
-- One role per student per meeting
-- Escaped user-generated output to reduce XSS risk
+## Notes
+
+- `backend/src/models/db.js` uses an in-memory datastore as a clean, testable baseline.
+- For deployment, replace with PostgreSQL/Mongo and persistent queues for SMS jobs.
