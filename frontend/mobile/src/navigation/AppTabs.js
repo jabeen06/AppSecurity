@@ -22,7 +22,13 @@ export default function AppTabs() {
       <Tab.Screen name="OR Tracker" component={ORTrackerScreen} />
       <Tab.Screen name="Roles" component={RoleGuidelinesScreen} />
       <Tab.Screen name="Conduct" component={ConductAndOathsScreen} />
-      {user?.role === 'admin' ? <Tab.Screen name="Admin" component={AdminPanelScreen} /> : null}
+      <Tab.Screen
+        name="Admin"
+        component={AdminPanelScreen}
+        options={{
+          tabBarButton: user?.role === 'admin' ? undefined : () => null
+        }}
+      />
     </Tab.Navigator>
   );
 }

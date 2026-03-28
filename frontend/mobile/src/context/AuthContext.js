@@ -14,7 +14,8 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     const { data } = await apiClient.post('/auth/login', { email, password });
     setAuthToken(data.token);
-    setAuth({ token: data.token, user: null });
+    // Use role from login immediately so tabs (e.g. Admin) match before /users/me returns.
+    setAuth({ token: data.token, user: data.user ?? null });
     await refreshMe();
   };
 
