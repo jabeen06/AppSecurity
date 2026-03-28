@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build output
+dist/
+build/
+.expo/
+web-build/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Test / coverage
+coverage/
+.nyc_output/

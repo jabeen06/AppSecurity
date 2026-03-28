@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String   @id @default(uuid())
+  name              String
+  classGrade        Int
+  section           String
+  phoneNumber       String
+  email             String   @unique
+  passwordHash      String
+  /// Completed OR stage numbers, e.g. [1, 2]
+  completedOrStages Int[]    @default([])
+
+  roleHistoryEntries RoleHistory[]
+  meetingsCreated    Meeting[]       @relation("MeetingCreator")
+  assignedRoles      AssignedRole[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RoleHistory {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  roleKey     String
+  meetingId   String
+  meeting     Meeting  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+  meetingDate String
+  meetingTime String
+  assignedAt  DateTime @default(now())
+}
+
+model AdminList {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Meeting {
+  id             String   @id @default(uuid())
+  date           String
+  time           String
+  startsAt       DateTime
+  availableRoles String[]
+
+  createdById String
+  createdBy   User   @relation("MeetingCreator", fields: [createdById], references: [id])
+
+  assignedRoles AssignedRole[]
+  roleHistories RoleHistory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AssignedRole {
+  id        String   @id @default(uuid())
+  meetingId String
+  meeting   Meeting  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+  roleKey   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  userEmail String
+  assignedAt DateTime @default(now())
+
+  @@unique([meetingId, roleKey])
+  @@unique([meetingId, userId])
+}
