@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import ScreenContainer from '../components/ScreenContainer';
 import { useAuth } from '../context/AuthContext';
+import { formatApiError } from '../utils/formatApiError';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function LoginScreen() {
@@ -17,7 +18,7 @@ export default function LoginScreen() {
     try {
       await login(email, password);
     } catch (e) {
-      setLoginError(e?.response?.data?.message || 'Login failed.');
+      setLoginError(formatApiError(e));
     }
   };
 

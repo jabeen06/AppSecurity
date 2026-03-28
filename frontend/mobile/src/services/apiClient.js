@@ -8,6 +8,9 @@ const rawBase =
   (typeof process !== 'undefined' && process.env?.EXPO_PUBLIC_API_BASE_URL) || 'http://localhost:4000/api';
 const baseURL = String(rawBase).replace(/\/+$/, '');
 
+/** Resolved base (for error messages). */
+export const resolvedApiBaseURL = baseURL;
+
 if (__DEV__ && /vercel\.app/i.test(baseURL) && !baseURL.endsWith('/api')) {
   console.warn(
     '[Oratory Guild] EXPO_PUBLIC_API_BASE_URL should be your API (…/api), same as VITE_API_BASE_URL — not the Vercel web app URL alone.'

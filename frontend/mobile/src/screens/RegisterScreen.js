@@ -3,6 +3,7 @@ import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import ScreenContainer from '../components/ScreenContainer';
 import { useAuth } from '../context/AuthContext';
+import { formatApiError } from '../utils/formatApiError';
 
 const CLASSES = ['6', '7', '8'];
 
@@ -47,7 +48,7 @@ export default function RegisterScreen() {
         })
       );
     } catch (e) {
-      setError(e?.response?.data?.message || 'Registration failed.');
+      setError(formatApiError(e));
     } finally {
       setLoading(false);
     }
