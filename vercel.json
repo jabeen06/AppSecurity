@@ -3,5 +3,10 @@
   "installCommand": "npm ci --prefix frontend/web",
   "buildCommand": "npm run build --prefix frontend/web",
   "outputDirectory": "frontend/web/dist",
+  "functions": {
+    "api/[...path].js": {
+      "maxDuration": 30
+    }
+  },
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
