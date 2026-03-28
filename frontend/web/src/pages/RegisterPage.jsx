@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import BrandLogo from '../components/BrandLogo.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
+import { formatApiError } from '../api/formatApiError.js';
 
 const CLASSES = ['6', '7', '8'];
 
@@ -40,7 +41,7 @@ export default function RegisterPage() {
       await register({ name, studentClass, section, phoneNumber, email, password });
       navigate('/login', { state: { registered: true } });
     } catch (e) {
-      setError(e?.response?.data?.message || 'Registration failed.');
+      setError(formatApiError(e));
     } finally {
       setLoading(false);
     }

@@ -11,6 +11,15 @@ export default defineConfig({
         changeOrigin: true
       }
     }
+  },
+  // `npm run preview` also needs /api proxied or registration/login break (same-origin /api).
+  preview: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000',
+        changeOrigin: true
+      }
+    }
   }
 });
 

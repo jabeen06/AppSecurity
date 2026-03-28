@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import BrandLogo from '../components/BrandLogo.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
+import { formatApiError } from '../api/formatApiError.js';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function LoginPage() {
       await login(email, password);
       navigate('/dashboard');
     } catch (e) {
-      setError(e?.response?.data?.message || 'Login failed.');
+      setError(formatApiError(e));
     } finally {
       setLoading(false);
     }
